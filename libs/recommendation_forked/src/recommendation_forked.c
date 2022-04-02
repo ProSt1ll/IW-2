@@ -216,11 +216,13 @@ object *recommends_list_forked(data_source *source) {
                 int cnt = 0;
                 for (int j = 0; j < source->users_amount; j++) {
                     if (source->users[j].marks[qbuf.numb] > 0) {
-                        all_objects[qbuf.numb].object_mark += source->users[j].marks[qbuf.numb];
+                        all_objects[qbuf.numb].object_mark
+                        += source->users[j].marks[qbuf.numb];
                         cnt++;
                     }
                 }
-                all_objects[qbuf.numb].object_mark = all_objects[qbuf.numb].object_mark / cnt;
+                all_objects[qbuf.numb].object_mark
+                = all_objects[qbuf.numb].object_mark / cnt;
             }
             exit(1);
         }
