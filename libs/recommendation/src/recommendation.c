@@ -69,10 +69,10 @@ int random_int(int min, int max) {
 
 char *create_nickname() {
     int length = random_int(3, 10);
-    char *array = (char *) calloc(length + 1, sizeof(char));
+    char *array = (char *) calloc(length+1, sizeof(char));
     for (int i = 0; i < length; i++)
         array[i] = random_int(65, 122);
-    array[length + 1] = '\0';
+    array[length] = '\0';
     return array;
 }
 
@@ -217,14 +217,14 @@ object *recommend(data_source *source, int id) {
     quick_sort_obj(recommend_obj, cnt);
     if (cnt > 10)
         cnt = 10;
-    object *recommend_objj = (object *) calloc(cnt, sizeof(object));
+    object *recommend = (object *) calloc(cnt, sizeof(object));
     for (int i = 0; i < cnt; i++) {
-        recommend_objj[i] = recommend_obj[i];
+        recommend[i] = recommend_obj[i];
     }
     free(array);
     free(recommend_obj);
     // print_recomm_obj(recommend_objj, cnt);
-    return recommend_objj;
+    return recommend;
 }
 
 
