@@ -19,7 +19,7 @@ jobs:
         run: mkdir build && cd build && cmake .. && make
 
       - name: static analys
-        run: cpplint --filter="-legal/copyright,-build/include_subdir,-readability/casting,-runtime/arrays" libs/find_words/src/* libs/find_words/include/* libs/find_words_forked/src/* libs/find_words_forked/include/* && cppcheck libs/find_words/src/* libs/find_words/include/* libs/find_words_forked/src/* libs/find_words_forked/include/*
+        run: cpplint --filter="-legal/copyright,-build/include_subdir,-readability/casting,-runtime/arrays" libs/recommendation/src/* libs/recommendation/include/* libs/recommendation_forked/src/* libs/recommendation_forked/include/* && cppcheck libs/recommendation/src/* libs/recommendation/include/* libs/recommendation_forked/src/* libs/recommendation_forked/include/*
 
       - name: tests_under_valgrind
         run: valgrind --leak-check=full --track-origins=yes ./build/tests && valgrind --leak-check=full --track-origins=yes --child-silent-after-fork=yes  ./build/tests_forked
