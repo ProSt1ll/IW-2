@@ -183,11 +183,11 @@ object *recommend(data_source *source, int id) {
 }
 
 object *recommends_list_forked(data_source *source) {
-
-    object *all_objects = (object *) mmap(NULL, sizeof(object) * source->objects_amount,
-                                          PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANONYMOUS,
+    object *all_objects = (object *) mmap(NULL,
+                                          sizeof(object) * source->objects_amount,
+                                          PROT_READ | PROT_WRITE,
+                                          MAP_SHARED | MAP_ANONYMOUS,
                                           0, 0);
-
     struct mymsgbuf {
         size_t mtype;
         size_t numb;
@@ -221,12 +221,10 @@ object *recommends_list_forked(data_source *source) {
                     }
                 }
                 all_objects[qbuf.numb].object_mark = all_objects[qbuf.numb].object_mark / cnt;
-
             }
             exit(1);
         }
     }
-
     waitpid(pid, 0, 0);
     for (size_t k = 0; k < max_forks; ++k) {
         waitpid(pids[k], 0, 0);
@@ -253,7 +251,6 @@ void print_recomm_obj(object *tmp, int size) {
         printf("№%d\n", i + 1);
         printf("id : %d \n", tmp[i].object_id);
         printf("Сумма оценок : %f \n", tmp[i].object_mark);
-
     }
     printf("---------------------------------"
            "--------------------------------- \n");
@@ -274,7 +271,6 @@ void print_users(data_source *source) {
             printf("%d", source->users[i].marks[j]);
         }
         printf("\n");
-
         printf("---------------------------------"
                "--------------------------------- \n");
     }
@@ -289,12 +285,10 @@ void print_obj(data_source *source) {
                "--------------------------------- \n");
         printf("id : %d \n", source->objects[i].object_id);
         printf("Сумма оценок : %f \n", source->objects[i].object_mark);
-
     }
     printf("---------------------------------"
            "--------------------------------- \n");
 }
-
 
 int find_size_users(const char *file_path) {
     if (file_path == NULL) {
