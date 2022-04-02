@@ -7,11 +7,13 @@
 *.obj
 *.elf
 
+.idea
+cmake-b*
 # Linker output
 *.ilk
 *.map
 *.exp
-
+/home/ilnur/Technopark/HW-2
 # Precompiled Headers
 *.gch
 *.pch
