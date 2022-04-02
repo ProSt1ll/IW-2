@@ -1,5 +1,5 @@
-#ifndef LIBS_RECOMMENDATION_INCLUDE_FIND_WORDS_H_
-#define LIBS_RECOMMENDATION_INCLUDE_FIND_WORDS_H_
+#ifndef LIBS_RECOMMENDATION_INCLUDE_RECOMMENDATION_H_
+#define LIBS_RECOMMENDATION_INCLUDE_RECOMMENDATION_H_
 
 #ifdef __cplusplus
 extern "C" {
@@ -40,7 +40,6 @@ int find_size_users(const char *file_path);
 
 int find_size_obj(const char *file_path, int num);
 
-
 char *read_nickname(const char *file, int number);
 
 int *read_obj(const char *file, int number, int size);
@@ -65,4 +64,4 @@ data_source create_random_data(int users, int obj);
 }
 #endif
 
-#endif  // LIBS_RECOMMENDATION_INCLUDE_FIND_WORDS_H_
+#endif  // LIBS_RECOMMENDATION_INCLUDE_RECOMMENDATION_H_

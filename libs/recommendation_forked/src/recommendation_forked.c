@@ -19,28 +19,32 @@ data_source create_data(const char *file) {
     data.objects = recommends_list_forked(&data);
     return data;
 }
-void refresh_rec(data_source* source){
-    source->objects= recommends_list_forked(source);
+
+void refresh_rec(data_source *source) {
+    source->objects = recommends_list_forked(source);
 }
-int random_int(int min, int max){
-    return min + rand() % (max+1 - min);
+
+int random_int(int min, int max) {
+    return min + rand() % (max + 1 - min);
 }
-char * create_nickname(){
-    int length = random_int(3,10);
-    char *array = (char *) calloc(length+1, sizeof(char));
-    for(int i =0;i<length;i++)
-        array[i]= random_int(65,122);
-    array[length+1] = '\0';
+
+char *create_nickname() {
+    int length = random_int(3, 10);
+    char *array = (char *) calloc(length + 1, sizeof(char));
+    for (int i = 0; i < length; i++)
+        array[i] = random_int(65, 122);
+    array[length + 1] = '\0';
     return array;
 }
 
-int * create_marks(int obj){
+int *create_marks(int obj) {
     int *array = (int *) calloc(obj, sizeof(int));
-    for(int i = 0;i <obj;i++)
-        array[i]= random_int(0,5);
+    for (int i = 0; i < obj; i++)
+        array[i] = random_int(0, 5);
     return array;
 }
-data_source create_random_data(int users,int obj){
+
+data_source create_random_data(int users, int obj) {
     data_source data;
     data.users_amount = users;
     data.capacity = users;
@@ -53,6 +57,7 @@ data_source create_random_data(int users,int obj){
     data.objects = recommends_list_forked(&data);
     return data;
 }
+
 int delete_data(data_source *source) {
     if (source == NULL)
         return -1;
@@ -168,20 +173,20 @@ object *recommend(data_source *source, int id) {
     if (cnt > 10)
         cnt = 10;
     object *recommend_objj = (object *) calloc(cnt, sizeof(object));
-    for (int i = 0; i<cnt;i++){
-        recommend_objj[i]=recommend_obj[i];
+    for (int i = 0; i < cnt; i++) {
+        recommend_objj[i] = recommend_obj[i];
     }
     free(array);
     free(recommend_obj);
-   // print_recomm_obj(recommend_objj, cnt);
+    // print_recomm_obj(recommend_objj, cnt);
     return recommend_objj;
 }
 
 object *recommends_list_forked(data_source *source) {
 
     object *all_objects = (object *) mmap(NULL, sizeof(object) * source->objects_amount,
-                            PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANONYMOUS,
-                            0, 0);
+                                          PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANONYMOUS,
+                                          0, 0);
 
     struct mymsgbuf {
         size_t mtype;
@@ -245,7 +250,7 @@ void print_recomm_obj(object *tmp, int size) {
     for (int i = 0; i < size; i++) {
         printf("---------------------------------"
                "--------------------------------- \n");
-        printf("№%d\n", i+1);
+        printf("№%d\n", i + 1);
         printf("id : %d \n", tmp[i].object_id);
         printf("Сумма оценок : %f \n", tmp[i].object_mark);
 

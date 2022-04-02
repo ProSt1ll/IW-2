@@ -3,7 +3,8 @@
 object *recommends_list(data_source *source) {
     if (source == NULL)
         return NULL;
-    object *all_objects = (object *) calloc(source->objects_amount, sizeof(object));
+    object *all_objects = (object *)
+            calloc(source->objects_amount, sizeof(object));
     if (all_objects == NULL)
         return NULL;
     for (int i = 0; i < source->objects_amount; i++) {
@@ -17,9 +18,9 @@ object *recommends_list(data_source *source) {
             }
         }
         all_objects[i].object_mark = all_objects[i].object_mark / cnt;
-        //printf("ready for %d\n",i*100/source->objects_amount);
+        // printf("ready for %d\n",i*100/source->objects_amount);
     }
-    //quick_sort_obj(all_objects,source->objects_amount);
+    // quick_sort_obj(all_objects,source->objects_amount);
     return all_objects;
 }
 
@@ -58,7 +59,6 @@ data_source create_data(const char *file) {
         delete_data(&data);
         perror("Ошибка создания 5");
         exit(EXIT_FAILURE);
-
     }
     return data;
 }
@@ -92,7 +92,6 @@ data_source create_random_data(int users, int obj) {
     for (int i = 0; i < data.users_amount; i++) {
         data.users[i].nickname = create_nickname();
         data.users[i].marks = create_marks(obj);
-
     }
     data.objects = recommends_list(&data);
     return data;
@@ -224,7 +223,7 @@ object *recommend(data_source *source, int id) {
     }
     free(array);
     free(recommend_obj);
-    //print_recomm_obj(recommend_objj, cnt);
+    // print_recomm_obj(recommend_objj, cnt);
     return recommend_objj;
 }
 
@@ -240,7 +239,6 @@ void print_recomm_obj(object *tmp, int size) {
         printf("№%d\n", i + 1);
         printf("id : %d \n", tmp[i].object_id);
         printf("Сумма оценок : %f \n", tmp[i].object_mark);
-
     }
     printf("---------------------------------"
            "--------------------------------- \n");
@@ -254,14 +252,12 @@ void print_users(data_source *source) {
         printf("---------------------------------"
                "--------------------------------- \n");
         printf("id : %d \n", i);
-
         printf("Nick : %s \n", source->users[i].nickname);
         printf("Marks :");
         for (int j = 0; j < source->objects_amount; j++) {
             printf("%d", source->users[i].marks[j]);
         }
         printf("\n");
-
         printf("---------------------------------"
                "--------------------------------- \n");
     }
@@ -276,7 +272,6 @@ void print_obj(data_source *source) {
                "--------------------------------- \n");
         printf("id : %d \n", source->objects[i].object_id);
         printf("Сумма оценок : %f \n", source->objects[i].object_mark);
-
     }
     printf("---------------------------------"
            "--------------------------------- \n");
