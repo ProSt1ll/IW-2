@@ -184,7 +184,8 @@ object *recommend(data_source *source, int id) {
 
 object *recommends_list_forked(data_source *source) {
     object *all_objects = (object *) mmap(NULL,
-                                          sizeof(object) * source->objects_amount,
+                                          sizeof(object)
+                                          * source->objects_amount,
                                           PROT_READ | PROT_WRITE,
                                           MAP_SHARED | MAP_ANONYMOUS,
                                           0, 0);
