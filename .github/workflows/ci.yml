@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [ dev ]
+
+jobs:
+  build:
+    environment: New
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: install references
+        run: sudo apt update && sudo apt-get install libgtest-dev -y && cd /usr/src/gtest && sudo cmake CMakeLists.txt && sudo make && cd lib && sudo cp *.a /usr/lib && sudo apt install build-essential && sudo apt install git && sudo apt-get install -y cppcheck && sudo apt-get install valgrind && sudo apt-get install -y lcov && sudo apt-get install -y gcovr && sudo apt install python3-pip -y && sudo pip install cpplint
+
+      - name: build
+        run: mkdir build && cd build && cmake .. && make
+
+      - name: static analys
+        run: cpplint --filter="-legal/copyright,-build/include_subdir,-readability/casting,-runtime/arrays,-runtime/threadsafe_fn" libs/recommendation/src/* libs/recommendation/include/* libs/recommendation_forked/src/* libs/recommendation_forked/include/* && cppcheck libs/recommendation/src/* libs/recommendation/include/* libs/recommendation_forked/src/* libs/recommendation_forked/include/*
+
+      - name: tests_under_valgrind
+        run: valgrind --leak-check=full --track-origins=yes ./build/tests && valgrind --leak-check=full --track-origins=yes --child-silent-after-fork=yes  ./build/tests_forked
+
+      - name: stress_tests_avg_time
+        run: ./build/stress_test && ./build/stress_test_forked
+
+      - name: code coverage
+        run: cd build && ./tests && ./tests_forked && cd ../ && gcovr -r . -e 'tests/'
+
+      - name: make coverage for Codecov
+        run: lcov -t "HW-2" -o coverage.txt -c -d . && cp coverage.txt ../
+
+      - name: upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./coverage.txt
+          flags: unittests
