@@ -153,7 +153,6 @@ data_source create_data(const char *file) {
     data_source data;
     data.users_amount = find_size_users(file);
     if (data.users_amount == 0) {
-
         delete_data(&data);
         perror("Ошибка создания 2");
         exit(EXIT_FAILURE);
@@ -220,7 +219,8 @@ data_source create_random_data(int users, int obj) {
     data.users_amount = users;
     data.capacity = users;
     data.objects_amount = obj;
-    data.users = (user *) calloc(data.users_amount, sizeof(user));
+    data.users = (user *)
+            calloc(data.users_amount, sizeof(user));
     for (int i = 0; i < data.users_amount; i++) {
         data.users[i].nickname = create_nickname();
         data.users[i].marks = create_marks(obj);

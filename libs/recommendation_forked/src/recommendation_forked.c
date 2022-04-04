@@ -192,7 +192,6 @@ data_source create_data(const char *file) {
     data_source data;
     data.users_amount = find_size_users(file);
     if (data.users_amount == 0) {
-
         delete_data(&data);
         perror("Ошибка создания 2");
         exit(EXIT_FAILURE);
@@ -239,7 +238,9 @@ int random_int(int min, int max) {
 }
 
 char *create_nickname() {
-    int length = random_int(MIN_RANDOM_NICKNAME_LENGHT, MAX_RANDOM_NICKNAME_LENGHT);
+    int length = random_int
+            (MIN_RANDOM_NICKNAME_LENGHT,
+             MAX_RANDOM_NICKNAME_LENGHT);
     char *array = (char *) calloc(length + 1, sizeof(char));
     for (int i = 0; i < length; i++)
         array[i] = random_int(65, 122);
