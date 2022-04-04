@@ -14,6 +14,13 @@ extern "C" {
 #include <string.h>
 #include <time.h>
 
+#define NUMBER_OF_RECOMMENDED 10
+#define START_NICKNAME_LENGHT 15
+#define MIN_RANDOM_NICKNAME_LENGHT 3
+#define MAX_RANDOM_NICKNAME_LENGHT 10
+#define MIN_RANDOM_MARK 0
+#define MAX_RANDOM_MARK 5
+
 typedef struct {
     char *nickname;
     int *marks;
@@ -32,39 +39,18 @@ typedef struct {
     int capacity;
 } data_source;
 
-int *find_word(const char *file_path, const char *file_word);
-
-char *input_words(const char *file_path, int i);
-
-int find_size(const char *word);
-
-void refresh_rec(data_source *source);
-
-int find_size_users(const char *file_path);
-
-int find_size_obj(const char *file_path, int num);
-
-int word_place(char *file, char *word);
-
-char *resize_str(const char *source, int size);
-
-char *read_nickname(const char *file, int number);
-
-int *read_obj(const char *file, int number, int size);
+int refresh_rec(data_source *source);
 
 data_source create_data(const char *file);
 
 object *recommend(data_source *source, int id);
 
-void quick_sort_obj(object *numbers, int size);
+int quick_sort_obj(object *numbers, int size);
 
 void print_obj(data_source *source);
 
-object *recommends_list_forked(data_source *source);
-
 void print_users(data_source *source);
 
-void print_recomm_obj(object *source, int size);
 
 int delete_data(data_source *source);
 
