@@ -1,17 +1,8 @@
 #include <gtest/gtest.h>
 #include "recommendation_forked.h"
 
-#define WORD_PATH "../files/words.txt"
 #define ERROR_FILE_PATH "../files/error.txt"
 
-TEST(test_data, test_data) {
-    data_source base = create_data(WORD_PATH);
-    EXPECT_EQ(base.users[0].marks[0], 1);
-    EXPECT_TRUE(base.users[0].nickname[0] == 'w');
-    EXPECT_TRUE(base.objects_amount == 8);
-    EXPECT_TRUE(base.objects[0].object_id == 0);
-    delete_data(&base);
-}
 
 TEST(test_data_random, test_data_random) {
     data_source base = create_random_data(20, 20);
