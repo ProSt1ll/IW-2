@@ -6,7 +6,7 @@
 
 int main() {
     double timer = 0;
-    data_source base = create_random_data(1000000, 16000);
+    data_source base = create_random_data(100000, 16000);
     for (size_t i = 0; i < NUM_OF_TESTS; i++) {
         clock_t begin = clock();
         refresh_rec(&base);
