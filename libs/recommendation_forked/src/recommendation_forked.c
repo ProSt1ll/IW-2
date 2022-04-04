@@ -334,7 +334,7 @@ object *recommend(data_source *source, int id) {
     free(array);
     if (cnt > NUMBER_OF_RECOMMENDED)
         cnt = NUMBER_OF_RECOMMENDED;
-    print_recomm_obj(recommend_obj, cnt);
+    //print_recomm_obj(recommend_obj, cnt);
     return recommend_obj;
 }
 
