@@ -199,7 +199,9 @@ int random_int(int min, int max) {
 }
 
 char *create_nickname() {
-    int length = random_int(MIN_RANDOM_NICKNAME_LENGHT, MAX_RANDOM_NICKNAME_LENGHT);
+    int length = random_int
+            (MIN_RANDOM_NICKNAME_LENGHT,
+             MAX_RANDOM_NICKNAME_LENGHT);
     char *array = (char *) calloc(length + 1, sizeof(char));
     for (int i = 0; i < length; i++)
         array[i] = random_int(65, 122);
