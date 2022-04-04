@@ -236,6 +236,7 @@ int refresh_rec(data_source *source) {
         return -1;
     if (source->objects == NULL)
         return -1;
+    free(source->objects);
     source->objects = recommends_list(source);
     return 0;
 }
